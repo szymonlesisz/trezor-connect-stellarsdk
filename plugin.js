@@ -1,5 +1,5 @@
 // Copy/paste from 'trezor-connect' repository:
-// https://github.com/trezor/connect/blob/develop/src/js/plugins/src/js/plugins/stellar/plugin.js
+// https://github.com/trezor/connect/blob/develop/src/js/plugins/stellar/plugin.js
 
 const StellarSdk = require('stellar-sdk');
 const BigNumber = require('bignumber.js');
