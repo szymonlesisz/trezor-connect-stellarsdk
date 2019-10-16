@@ -17,6 +17,8 @@ const prepareTransaction = (operation, memo, timebounds) => {
 
     if (!timebounds) {
         builder.setTimeout(timebounds ? undefined : 0);
+    } else if (!timebounds.maxTime) {
+        builder.setTimeout(StellarSdk.TimeoutInfinite)
     }
     builder.addMemo(memo ? memo : StellarSdk.Memo.none());
 
@@ -42,12 +44,15 @@ const signWithSecret = (fixture) => {
 
 
     const txSignature = transaction.signatures[0].signature().toString('base64');
-    const trezorSignature = Buffer.from(fixture.signature, 'hex').toString('base64')
 
-    if (txSignature !== trezorSignature) {
-        console.log("tx signature", txSignature);
-        console.log("trezor signature", trezorSignature);
+    if (fixture.signature) {
+        const trezorSignature = Buffer.from(fixture.signature, 'hex').toString('base64')
+        if (txSignature !== trezorSignature) {
+            console.log("tx signature", txSignature);
+            console.log("trezor signature", trezorSignature);
+        }
     }
+
     return transaction;
 }
 
@@ -57,7 +62,8 @@ const signWithSignature = (fixture) => {
     try {
         transaction.addSignature(SOURCE_ACCOUNT, Buffer.from(fixture.signature, 'hex').toString('base64'));
     } catch (error) {
-        console.log('Hex signature invalid');
+        if (fixture.signature) console.log('Hex signature invalid');
+        else console.log('No signature');
     }
     return transaction;
 }
