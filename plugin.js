@@ -33,6 +33,16 @@ const transformSigner = (signer) => {
 };
 
 /**
+ * Transforms StellarSdk.Asset array to TrezorConnect.StellarTransaction.Asset
+ * array
+ * @param {...StellarSdk.Asset} path
+ * @returns { ... type: 0 | 1 | 2, code: string, issuer?: string }
+ */
+const transformPath = (path) => {
+  return path.map(transformAsset);
+};
+
+/**
  * Transforms StellarSdk.Asset to TrezorConnect.StellarTransaction.Asset
  * @param {StellarSdk.Asset} asset
  * @returns { type: 0 | 1 | 2, code: string, issuer?: string }
@@ -135,6 +145,11 @@ const transformTransaction = (path, transaction) => {
         // transform StellarSdk.Signer
         if (operation.signer) {
             operation.signer = transformSigner(operation.signer);
+        }
+
+        // transform asset path
+        if (operation.path) {
+          operation.path = transformPath(operation.path);
         }
 
         // transform "price" field to { n: number, d: number }
