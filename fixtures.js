@@ -15,18 +15,18 @@ const fixtures = [
         }),
         memo: new StellarSdk.Memo(StellarSdk.MemoText, 'foobar'),
     },
-    {
-        description: 'memo type text (binary)',
-        signature: false,
-        op: Operation.setOptions({}),
-        memo: new StellarSdk.Memo(StellarSdk.MemoText, Buffer.from("TREZOQ", "base64")),
-    },
-    {
-        description: 'memo type text (binary w/ NULL)',
-        signature: false,
-        op: Operation.setOptions({}),
-        memo: new StellarSdk.Memo(StellarSdk.MemoText, Buffer.from("ABCD", "base64")),
-    },
+    // {
+    //     description: 'memo type text (binary)',
+    //     signature: false,
+    //     op: Operation.setOptions({}),
+    //     memo: new StellarSdk.Memo(StellarSdk.MemoText, Buffer.from("TREZOQ", "base64")),
+    // },
+    // {
+    //     description: 'memo type text (binary w/ NULL)',
+    //     signature: false,
+    //     op: Operation.setOptions({}),
+    //     memo: new StellarSdk.Memo(StellarSdk.MemoText, Buffer.from("ABCD", "base64")),
+    // },
     {
         description: 'memo type id',
         signature: 'b26eb3e67c0aa59a7f8275726249fb2d862d723d54cbdd24c6d1a7597a0830650fef55b6b4366a59b0978cd3d288e724658c4b0068eb5fc918e1fb6d44b6ea08',
@@ -92,13 +92,13 @@ const fixtures = [
     },
     {
         description: 'timebounds - minTime only',
-        signature: false,
+        signature: '38099504f25a2578e447cd6257f43343b7b957689d8e8698e94ee66660b6fe32b9ec9848840279026e95953d8fb175b86a0813be7e5e015cd58d51553ec97909',
         op: Operation.setOptions({}),
         timebounds: { minTime: 1000000000, maxTime: 0 },
     },
     {
         description: 'timebounds - minTime and maxTime',
-        signature: false,
+        signature: '57c79a904825c748e30dda9ea7a868d6d939d76a573fe7fc8e174dcacd6581c5a34e5252bcc619b5b141feef21bc9d69da471f7090a17406136e11dbc1b06e04',
         op: Operation.setOptions({}),
         timebounds: { minTime: 1000000000, maxTime: 1580800029 },
     },
@@ -124,7 +124,7 @@ const fixtures = [
     },
     {
         description: 'allowTrust',
-        signature: false,
+        signature: 'bb40e85b8e4c771cb18408ef610cffc1aad5411294500da09178157994a17a7c317bb45e795b2d965779f7385d5361508c7e591ae9c9c9f6fdb7e3b1c2d3e105',
         op: Operation.allowTrust({
             trustor: 'GAUYJFQCYIHFQNS7CI6BFWD2DSSFKDIQZUQ3BLQODDKE4PSW7VVBKENC',
             assetCode: 'XLM',
@@ -168,7 +168,7 @@ const fixtures = [
     },
     {
         description: 'changeTrust with arbitrary limit',
-        signature: false,
+        signature: '544ae7d8f5740b9794e4f42117c30aeb6ca4b82ff4334dea8ff4a06b443e151e8cb5de7aaadc98d0dc4459ca51c02dbe72716d802c8def483b9409550886a700',
         op: Operation.changeTrust({
             asset: new Asset('X', 'GAUYJFQCYIHFQNS7CI6BFWD2DSSFKDIQZUQ3BLQODDKE4PSW7VVBKENC'),
             limit: '1000',
@@ -176,7 +176,7 @@ const fixtures = [
     },
     {
         description: 'changeTrust (remove trust)',
-        signature: false,
+        signature: 'fd26fef29dc5ce8b011206a277de10c35fdef484e665213c0a034003193d75183e0667a2dd876b17323c56900974080ed28fe51bd6b1ed89095632e38e048400',
         op: Operation.changeTrust({
             asset: new Asset('X', 'GAUYJFQCYIHFQNS7CI6BFWD2DSSFKDIQZUQ3BLQODDKE4PSW7VVBKENC'),
             limit: '0',
@@ -236,7 +236,7 @@ const fixtures = [
     },
     {
         description: 'createPassiveSellOffer { n, d } price',
-        signature: false,
+        signature: '32fdececbc1d1731dce6979d3e0c77cb433b8c12cb242decc9706b7ca6bebf8534bea71603556612cb44badfda230b0f6886ca3f51546e989a97cb91d4871304',
         op: Operation.createPassiveSellOffer({
             selling: Asset.native(),
             buying: Asset.native(),
@@ -256,15 +256,15 @@ const fixtures = [
     },
     {
         description: 'manageData Buffer value',
-        signature: false,
+        signature: '0bbd890aceb16e3aeb27827e3663769f80830bd118ebaa899eb957f6b4b7676a4819c6993b2ec794c2cdacf6dfa3731fd9219cc4acf7e14cba0a82c9c21acd0d',
         op: Operation.manageData({
             name: 'data',
-            value: new Buffer("ABCD", "base64"),
+            value: Buffer.from("ABCD", "base64"),
         }),
     },
     {
         description: 'manageData remove entry',
-        signature: false,
+        signature: 'c1ebb8d2b23a9145dfec9a465702484ed6130a824dc5d4eb2a1c98f011b463ad9de6eee3d241942aa0aa33a215390f465c375a4c6800e947a1c14b17b3206709',
         op: Operation.manageData({
             name: 'data',
             value: null,
@@ -321,7 +321,7 @@ const fixtures = [
     },
     {
         description: 'manageSellOffer { n, d } price',
-        signature: false,
+        signature: '9e814c4f9c44a4b54451672fd7135b8cc3b2233e811167efb2e9e5f284c291d0ac41a1c9aa252f6893d8db0bb46aa6e78ecfe8edd8993fd8c6b1a243a1c8b40e',
         op: Operation.manageSellOffer({
             selling: Asset.native(),
             buying: Asset.native(),
@@ -331,7 +331,7 @@ const fixtures = [
     },
     {
         description: 'manageSellOffer new offer',
-        signature: false,
+        signature: 'b81209bb37b9408f01762bb276e913697032137bdbc007ba9db883391bc8b6b0b7e3cc299efede60081a343ace6ac9e1036d7466516250784d4eb09b76099104',
         op: Operation.manageSellOffer({
             selling: Asset.native(),
             buying: Asset.native(),
@@ -341,7 +341,7 @@ const fixtures = [
     },
     {
         description: 'manageSellOffer remove offer',
-        signature: false,
+        signature: 'cb974b89e0286c9c616f12cb377ccfcf7a4d7c262a75721013248972a8f2b69b5462bb368c425a3df2f06846ce1de62fb458b0d862feb289af670361621cbc08',
         op: Operation.manageSellOffer({
             selling: Asset.native(),
             buying: Asset.native(),
@@ -398,7 +398,7 @@ const fixtures = [
     },
     {
         description: 'pathPaymentStrictReceive with path',
-        signature: false,
+        signature: 'c6999c263fa4ab9f22cdfaef42101b4b4706bf17fca3867e6a0a69a1fc7034932d0fb01db610e8e973eef379d4714f44f0b60acf45524bc7aa94fbbdae259e0f',
         op: Operation.pathPaymentStrictReceive({
             sendAsset: Asset.native(),
             sendMax: '50.0111000',
@@ -444,7 +444,7 @@ const fixtures = [
     /* Operations - Set Options */
     {
         description: 'setOptions: noop',
-        signature: false,
+        signature: '837c9a09112a111a457a52f81194488c08ed2989059bb597490b1b918380d5ad2b8061f8892068f2ebfb8d51d81b722c274d9a4fec90d5aa071c91dc66e68f0e',
         op: Operation.setOptions({}),
     },
     {
@@ -486,7 +486,7 @@ const fixtures = [
     },
     {
         description: 'setOptions: remove signer',
-        signature: false,
+        signature: '82bade0d47be0ec690ba2ee301fcf354d7635dbad108900a82ed7b9fc7f340d76e6e85c00388fe56cc6a3b856b339d6f15abd4d965e4590b0286c7e5f4620907',
         op: Operation.setOptions({
             signer: {
                 ed25519PublicKey: 'GBZBQ6W3Q6OECQ2G256HDL4MZZ5W5KSXWUUOTGP5SH7K423EDBRI5DDK',
@@ -521,7 +521,7 @@ const fixtures = [
     },
     {
         description: 'setOptions: unset homeDomain',
-        signature: false,
+        signature: 'ce69d6bced2cc8a4280a22cb9fa109b3b6fd8e9ac06f78e18f7675ba77651dc7435fbbc0d392ab4396a833de37be42100fa3a55f7d8cd56c8252983042045108',
         op: Operation.setOptions({
             homeDomain: '',
         }),
